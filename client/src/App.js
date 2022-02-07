@@ -10,11 +10,9 @@ function App() {
     Axios.post('http://localhost:3001/api/insert',{
       movieName: movieName,
       movieReview: review,
-    }).then(()=>{
-      alert('successfully inserted')
-    });
-    const movieN = movieName;
-    alert(movieN)
+    }).then(alert('successfully inserted'));
+    // const movieN = movieName;
+    // alert(movieN)
   }
 
   return (

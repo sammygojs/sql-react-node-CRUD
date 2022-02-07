@@ -21,11 +21,13 @@ app.post('/api/insert',(req,res)=>{
     console.log("movieReview: ", movieReview)
 
 
-    // const sqlInsert = 
-    // "INSERT INTO movie_reviews (movieName, movieReview) VALUES (?,?);"
-    // db.query(sqlInsert, [movieName,movieReview], (err,result)=>{
-    //     console.log(result)
-    //  })
+    const sqlInsert = 
+    "INSERT INTO movie_reviews (movieName, movieReview) VALUES (?,?);"
+    db.query(sqlInsert, [movieName,movieReview], (err,result)=>{
+        console.log(`sqlInsert: `, sqlInsert )
+        console.log(`result: `,result)
+        console.log(`err: `,err)
+     })
 })
 
 app.listen(3001,()=> console.log(`listening on port 3001`))
