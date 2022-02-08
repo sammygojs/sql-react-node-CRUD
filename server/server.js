@@ -44,8 +44,31 @@ app.post('/api/insert',(req,res)=>{
 })
 
 app.delete('/api/delete/:movieName',(req,res)=>{
-    const name = req.params.movieName
-    console.log(name)
+    const movieName = req.params.movieName
+    const sqlInsert = 
+    "DELETE FROM movie_reviews WHERE movieName = ?;"
+    db.query(sqlInsert, movieName, (err,result)=>{
+        console.log(`sqlInsert: `, sqlInsert )
+        console.log(`result: `,result)
+        console.log(`err: `,err)
+        
+     })
+    console.log(movieName)
+})
+
+app.put(`/api/update`,(req,res)=>{
+    const movieName = req.body.movieName
+    const movieReview = req.body.movieReview
+    // console.log("movieName: ", movieName)
+    // console.log("movieReview: ", movieReview)
+    const sqlInsert = 
+    "UPDATE movie_reviews SET movieReview = ? WHERE movieName = ?"
+    db.query(sqlInsert,[movieReview,movieName],(err,result)=>{
+        console.log(`sqlInsert: `, sqlInsert )
+        console.log(`result: `,result)
+        console.log(`err: `,err)
+    })
+
 })
 
 app.listen(3001,()=> console.log(`listening on port 3001`))
