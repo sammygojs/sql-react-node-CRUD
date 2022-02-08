@@ -5,17 +5,24 @@ import Axios from 'axios'
 function App() {
   const [movieName, setMovieName] = useState('')
   const [review, setReview] = useState('')
+  const [movieList, setMovieList] = useState([])
 
   useEffect(()=>{
-    Axios.get('http://localhost:3001/api/get').then((response)=>{console.log(response.data)})
-  })
+    Axios.get('http://localhost:3001/api/get').then((response)=>{
+      // console.log(response.data)
+      setMovieList(response.data)})
+  },[])
 
 
   const submitReview = () =>{
     Axios.post('http://localhost:3001/api/insert',{
       movieName: movieName,
       movieReview: review,
-    }).then(alert('successfully inserted'));
+    }).then(
+      setMovieList([...movieList,{movieName:movieName, movieReview:review} ])
+      // alert('successfully inserted')
+      
+      );
     // const movieN = movieName;
     // alert(movieN)
   }
@@ -36,7 +43,14 @@ function App() {
         setReview(e.target.value)
       }}></input>
       <button onClick={submitReview}>Submit</button>
+      { movieList.map((val)=>{
+      return <h1>
+      Moviename: {val.movieName} | Movie Review: {val.movieReview}
+      </h1>
+    }) }
     </div>
+
+    
   );
 }
 
