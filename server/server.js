@@ -43,5 +43,10 @@ app.post('/api/insert',(req,res)=>{
      })
 })
 
+app.delete('/api/delete/:movieName',(req,res)=>{
+    const name = req.params.movieName
+    console.log(name)
+})
+
 app.listen(3001,()=> console.log(`listening on port 3001`))
 

@@ -14,6 +14,12 @@ function App() {
   },[])
 
 
+  const deleteReview = (name) =>{
+    Axios.delete(`http://localhost:3001/api/delete/${name}`)
+    .then(()=>{alert('deleted')})
+    console.log("name: ",name)
+  }
+
   const submitReview = () =>{
     Axios.post('http://localhost:3001/api/insert',{
       movieName: movieName,
@@ -44,9 +50,13 @@ function App() {
       }}></input>
       <button onClick={submitReview}>Submit</button>
       { movieList.map((val)=>{
-      return <h1>
-      Moviename: {val.movieName} | Movie Review: {val.movieReview}
-      </h1>
+      return <div class="center">
+      <h1>Moviename: {val.movieName}</h1>
+      <p>Movie Review: {val.movieReview}</p>
+      <input type="text" id="updateText"></input>
+      <button onClick={()=>deleteReview(val.movieName)}>Delete</button>
+      <button>Update</button>
+      </div>
     }) }
     </div>
 
